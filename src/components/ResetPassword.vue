@@ -183,6 +183,7 @@
   }
 
 
+
   .hr-left {
       position: absolute;
       width: 36vw;
