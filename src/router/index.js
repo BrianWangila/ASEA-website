@@ -1,13 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import UserLogin from '../components/UserLogin.vue';
-import IntranetPage from '../components/IntranetPage.vue'
-import MyData from '../components/MyData.vue'
-import DashboardPage from '../components/DashboardPage.vue'
-import NotFound from '../components/NotFound.vue'
-import ResetPassword from '../components/ResetPassword.vue'
+//importing components
+import UserLogin from '@/components/UserLogin.vue';
+import IntranetPage from '@/components/pages/IntranetPage.vue'
+import MyData from '@/components/pages/MyData.vue'
+import MarketData from '@/components/pages/MarketData.vue'
+import Home from '@/components/Home.vue'
+import NotFound from '@/components/NotFound.vue'
+import ResetPassword from '@/components/pages/ResetPassword.vue'
 
 
+// routes
 const routes = [
   {
     path: '/login',
@@ -18,8 +21,12 @@ const routes = [
     component: MyData
   },
   {
-    path: '/dashboard',
-    component: DashboardPage
+    path: '/market-data',
+    component: MarketData
+  },
+  {
+    path: '/',
+    component: Home
   },
   {
     path: '/intranet',

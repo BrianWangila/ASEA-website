@@ -1,15 +1,15 @@
 <template>
   <div class="login-page">
     <div class="logo">
-      <img src="../assets/asea-logo.png" />
+      <img src="@/assets/asea-logo.png" />
       <a style="text-decoration: none; font-size: 15px; color: #090234" href="mailto: aseasecretariat@african-exchanges.org"><p>aseasecretariat@african-exchanges.org</p></a>
     </div>
 
   
     <div class="display-flex">
       <div class="side-svg">
-        <img id="one" src="../assets/sidegraph.svg" />
-        <img id="two" src="../assets/comp.svg" />
+        <img id="one" src="@/assets/sidegraph.svg" />
+        <img id="two" src="@/assets/reset.svg" />
       </div>
 
       <div>
@@ -20,20 +20,25 @@
             <p style="font-size: 15px; margin-top: 2vh;">Enter your email address to receive a reset link</p>
           </div>
 
-          <form @submit="onSubmit">
+          <form @submit.prevent="onSubmit">
             <div class="mb-3">
               <label for="formGroupExampleInput" class="form-label">Email</label>
               <input 
-                v-model="email"
-                type="text"
-                class="form-control one" 
+                v-model="resetData.email"
+                type="email"
+                class="form-control one"
+                :class="{'is-invalid': validationStatus(resetValidation.email)}"
                 placeholder="Enter your email address">
+                <div v-if="resetValidation.email.required" class="invalid-feedback">Email is required</div>
             </div>
             
 
             <div class="button">
               <button type="submit">SUBMIT</button>
-              <router-link to='/login' style="text-decoration: none;"><p>Go back to login page</p></router-link>
+              <div class="svg-icon">
+                <font-awesome-icon icon="fa-solid fa-arrow-left-long" style="height: 17px; margin-top: 3px;"/>
+                <router-link to='/login' style="text-decoration: none;"><p>Back to login</p></router-link>
+              </div>
             </div>
           </form>
 
@@ -43,8 +48,8 @@
       </div>
 
       <div class="right-svg">
-        <img style="height: 150px; margin-top: 10vh; margin-bottom: 5vh;" src="../assets/bargraph.svg" />
-        <img style="height: 350px; margin-bottom: 15vh;"  src="../assets/carrier.svg" />
+        <img style="height: 150px; margin-top: 10vh; margin-bottom: 5vh;" src="@/assets/bargraph.svg" />
+        <img style="height: 350px; margin-bottom: 15vh;"  src="@/assets/carrier.svg" />
       </div>
     </div>
 
@@ -60,34 +65,66 @@
 
 
 <script>
-  // import axios from 'axios';
+  import axios from 'axios';
+  import { useVuelidate } from '@vuelidate/core'
+  import { required, email } from '@vuelidate/validators'
+  import { ref } from 'vue';
 
   export default {
+    
     name: 'ResetPassword',
-    data(){
-      return {
-        email: "",
-      }
+    setup(){
+      const resetData = ref({
+        email: ""
+      });
+
+      const resetRule = {
+        email: {required, email}
+      };
+
+      const resetValidation = useVuelidate(resetRule, resetData);
+      
+      return { resetData, resetValidation }
+    },
+
+    created(){
+      this.router = this.$router;
     },
 
     methods : {
-        onSubmit(e){
-        e.preventDefault()
+      validationStatus(validation){
+        return typeof validation != "undefined" ? validation.$error : false;
+      },
 
+      async onSubmit(){
 
+        await axios.post('http://127.0.0.1:8000/api/reset', this.resetData)
+          .then((resp) => {
+            console.log(resp)
 
-   
+            this.route.push('/login')
+          })
+
+  
         this.email = ""
 
       }
     }
   }
 
+
+
 </script>
 
 
 
 <style scoped>
+
+  .login-page {
+    background-color: #EDEAEA;
+    height: 100vh;
+    
+  }
 
   .display-flex {
     display: flex;
@@ -138,10 +175,11 @@
 
   form {
     padding: 30px;
-    margin-top: 7vh;
+    margin-top: 5vh;
   }
 
   .one {
+    margin-top: 1vh;
     height: 50px;
     border: 1px solid #D1CFC9;
     background-color: rgba(210, 209, 212, 0.3);
@@ -175,14 +213,10 @@
   }
 
   .button p {
-    margin-top: 2vh;
-    text-align: center;
-    font-size: 15px;
     color: #090234;
+    margin-left: 10px;
 
   }
-
-
 
   .hr-left {
       position: absolute;
@@ -202,6 +236,14 @@
       bottom: 19.5vh;
 
       border: 1px solid rgba(203, 194, 194, 0.6);
+  }
+
+  .svg-icon {
+    display: flex;
+    justify-content: center;
+    margin-top: 2vh;
+    font-size: 15px;
+    color: #090234;
   }
 
 </style>

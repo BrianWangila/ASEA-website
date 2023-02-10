@@ -19,29 +19,35 @@
             <h3>Welcome Back </h3>
             <p style="font-size: 15px; margin-top: 1vh;">Enter your details to continue to ASEA Portal</p>
           </div>
-
-          <form @submit="onLogin">
+          <!-- <p>{{ message }}</p>  -->
+          <form @submit.prevent="onLogin">
             <div class="mb-3">
               <label for="formGroupExampleInput" class="form-label">Email</label>
               <input 
-                v-model="email"
-                type="text"
+                v-model="loginData.email"
+                type="email"
                 class="form-control one" 
+                :class="{'is-invalid': validationStatus(loginValidation.email)}"
                 placeholder="Enter your email address">
+                <div v-if="loginValidation.email.required" class="invalid-feedback">Email is required</div>
+                <div v-else-if="loginValidation.email.email" class="invalid-feedback">Invalid Email Format</div>
+                
             </div>
 
             <div class="mb-3" style="margin-top: 3vh">
               <label for="formGroupExampleInput2" class="form-label ">Password</label>
               <input 
-                v-model="password"
-                type="text" 
+                v-model="loginData.password"
+                type="password" 
                 class="form-control one"
                 placeholder="Enter your password">
+                <!-- <div v-if="loginValidation.password.required" class="invalid-feedback">Password is required</div> -->
+
             </div>
 
             <div class="form-check" style="margin-top: 1vh">
               <input
-                v-model="checkbox"
+                v-model="loginData.checkbox"
                 class="form-check-input check" 
                 type="checkbox" 
                 id="gridCheck" 
@@ -82,34 +88,75 @@
 
 <script>
   import axios from 'axios';
+  import { useVuelidate } from '@vuelidate/core'
+  import { required, email, between } from '@vuelidate/validators'
+  import { ref } from 'vue';
+
 
   export default {
     name: 'UserLogin',
-    data(){
-      return {
+
+    setup() {
+
+      const message = ref("");
+
+      const loginData = ref({
         email: "",
         password: "",
         checkbox: false
-      }
+      });
+
+      const loginRules = {
+        email: {required, email},
+        password: {required, between: between(5, 15)},
+      };
+
+      const loginValidation = useVuelidate(loginRules, loginData);
+      
+      return { loginData, loginValidation, message };
+    },
+
+    created(){
+      this.router = this.$router;
     },
 
     methods : {
-        async onLogin(e){
-        e.preventDefault()
+      
+      // validation status method
+      validationStatus(validation) {
+        return typeof validation != "undefined" ? validation.$error : false;
+      },
 
-        const resp = await axios.post('http://127.0.0.1:8000/api/login', {
-          email: this.email,
-          password: this.password,
-        });
+      //sending login credentials to the backend
+      async onLogin(){
+        this.loginValidation.$touch();
 
-        if(resp.status == 201){
-          localStorage.setItem('token', resp.data.token);
-          console.log(resp)
+        if(this.loginValidation.pending || this.loginValidation.error) return;
 
+        try {
+          await axios.post('http://127.0.0.1:8000/api/login', this.loginData, {headers: {}})
+            .then(resp => {
+
+              localStorage.setItem('token', resp.data.token);
+              localStorage.setItem('user', JSON.stringify(resp.data.user));
+              
+              this.router.push('/');
+            })
+            .catch(error => {
+
+              const errorMsg = error.message;
+              this.message = errorMsg;
+            })
+            .finally(() => {
+
+            });
+        } catch (error) {
+          console.log(error)
         }
+        
 
 
-   
+    
         this.email = ""
         this.password = ""
         this.checkbox = false
@@ -123,6 +170,12 @@
 
 
 <style scoped>
+
+  .login-page {
+    background-color: #EDEAEA;
+    height: 100vh;
+    
+  }
 
   .display-flex {
     display: flex;

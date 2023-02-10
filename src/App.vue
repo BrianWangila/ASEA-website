@@ -17,7 +17,7 @@ export default {
 
 
 <style scoped>
-  .user-login {
+  template {
     background-color: #EDEAEA;
     height: 100vh;
     
