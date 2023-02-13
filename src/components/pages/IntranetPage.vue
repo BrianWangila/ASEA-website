@@ -8,9 +8,13 @@
         <div class="dashboard">
           <div class="title">
             <h3>Intranet</h3>
-            <div>
-              <!-- <p>Home / <span style="font-weight: 500">Dashboard</span></p> -->
-            </div>
+          </div>
+
+          <div class="header-tabs">
+            <div type="button" style="margin-right: 3rem">Member Documents</div>
+            <div type="button" style="margin-right: 3rem">AGM Documents</div>
+            <div type="button" style="margin-right: 3rem">Committees</div>
+            <div type="button">Gallery</div>
           </div>
         </div>
       </div>
@@ -58,6 +62,13 @@
     border-radius: 30px 0 0 30px;
     width: 100vw;
     height: 92vh;
+  }
+
+  .header-tabs {
+    display: flex;
+    justify-content: center;
+
+
   }
 
   .dashboard .title {
