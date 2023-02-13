@@ -8,7 +8,7 @@
         <img src="@/assets/avatar.png" />
       </div>
       <div>
-        <button>My Profile</button>
+        <router-link to="/my-profile"><button>My Profile</button></router-link>
       </div>
       <div>
         <p>Welcome, <span>{{ user.name }}.</span></p>
@@ -17,32 +17,41 @@
 
 
     <div class="menu-icons">
-      <div v-for="item in items" :key="item.id" :class="{ active: item.isActive }" @click="setActive(item)">
-        <router-link :to="item.path">
+      <!-- <div v-for="item in items" :key="item.id" :class="{ active: item.isActive }" @click="setActive(item)">
+        <router-link :u,
+        Footer,to="item.path">
           <img :src="item.image">
           <button>{{ item.name }}</button>
         </router-link>
-      </div>
-
-      <!-- <div class="active">
-        <img src="@/assets/dash-svg.svg" />
-        <router-link to="/" ><button>Dashboard</button></router-link>
-      </div>
-
-      <div class="active">
-        <img src="@/assets/data-svg.svg" />
-        <router-link to="/my-data"><button>Manage Data</button></router-link>
-      </div>
-
-      <div class="active">
-        <img src="@/assets/market-svg.svg" />
-        <router-link to="/market-data"><button>Market Feed</button></router-link>
-      </div>
-
-      <div class="active">
-        <img src="@/assets/intranet-svg.svg" />
-        <router-link to="/intranet"><button>Intranet</button></router-link>
       </div> -->
+
+      <div class="active">
+        <router-link to="/" >
+          <img src="@/assets/dash-svg.svg" />
+          <button>Dashboard</button>
+        </router-link>
+      </div>
+
+      <div class="">
+        <router-link to="/my-data">
+          <img src="@/assets/data-svg.svg" />
+          <button>Manage Data</button>
+        </router-link>
+      </div>
+
+      <div class="">
+        <router-link to="/market-data">
+          <img src="@/assets/market-svg.svg" />
+          <button>Market Feed</button>
+        </router-link>
+      </div>
+
+      <div class="">
+        <router-link to="/intranet">
+          <img src="@/assets/intranet-svg.svg" />
+          <button>Intranet</button>
+        </router-link>
+      </div>
     </div> 
 
     <div class="logout">
@@ -165,13 +174,12 @@
     height: 37vh;
     width: 12vw;
     margin-top: 4rem;
-    margin-bottom: 5rem;
+    margin-bottom: 5rem; 
     border: 1px solid #D9D9D9;
     border-radius: 10px;
     padding: 1rem;
     display: flex;
     list-style: none;
-    margin: 0;
     padding: 0;
     /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 1px 1px; */
   }
@@ -195,7 +203,7 @@
 
   .menu-icons button {
     border: none;
-    background: none;
+    background: none; 
 
   }
 
