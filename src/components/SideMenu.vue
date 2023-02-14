@@ -17,41 +17,25 @@
 
 
     <div class="menu-icons">
-      <!-- <div v-for="item in items" :key="item.id" :class="{ active: item.isActive }" @click="setActive(item)">
-        <router-link :u,
-        Footer,to="item.path">
-          <img :src="item.image">
-          <button>{{ item.name }}</button>
-        </router-link>
-      </div> -->
-
-      <div class="active">
-        <router-link to="/" >
+      <router-link to="/" class="tab" :class="{ active: activeTab === 'Dashboard' }" @click="activeTab = 'Dashboard'">
           <img src="@/assets/dash-svg.svg" />
           <button>Dashboard</button>
-        </router-link>
-      </div>
+      </router-link>
 
-      <div class="">
-        <router-link to="/my-data">
+      <router-link to="/my-data" class="tab" :class="{ active: activeTab === 'Manage' }" @click="activeTab = 'Manage'">
           <img src="@/assets/data-svg.svg" />
           <button>Manage Data</button>
-        </router-link>
-      </div>
+      </router-link>
 
-      <div class="">
-        <router-link to="/market-data">
+      <router-link to="/market-data" class="tab" :class="{ active: activeTab === 'Market' }" @click="activeTab = 'Market'">
           <img src="@/assets/market-svg.svg" />
           <button>Market Feed</button>
-        </router-link>
-      </div>
+      </router-link>
 
-      <div class="">
-        <router-link to="/intranet">
+      <router-link to="/intranet" class="tab" :class="{ active: activeTab === 'Intranet' }" @click="activeTab = 'Intranet'">
           <img src="@/assets/intranet-svg.svg" />
           <button>Intranet</button>
-        </router-link>
-      </div>
+      </router-link>
     </div> 
 
     <div class="logout">
@@ -78,15 +62,9 @@
     data() {
       return {
         user: JSON.parse(localStorage.getItem('user')),
-
         token: localStorage.getItem('token'),
+        activeTab: "Dashboard"
 
-        items: [
-          { id: 1, path: "/", image: "@/assets/dash-svg.svg",  name: "Dashboard", isActive: true },
-          { id: 2, path: "/my-data", image: "@/assets/data-svg.svg", name: "Manage Data", isActive: false },
-          { id: 3, path: "/market-data", image: "@/assets/market-svg.svg", name: "Market Feed", isActive: false },
-          { id: 4, path: "/intranet", image: "@/assets/intranet-svg.svg", name: "Intranet", isActive: false }
-        ]
       };
     },
 
@@ -170,7 +148,7 @@
   .menu-icons {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     height: 37vh;
     width: 12vw;
     margin-top: 4rem;
@@ -178,22 +156,38 @@
     border: 1px solid #D9D9D9;
     border-radius: 10px;
     padding: 1rem;
-    display: flex;
     list-style: none;
     padding: 0;
     /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgba(0, 0, 0, 0.23) 0px 1px 1px; */
   }
 
 
-  .menu-icons div {
+  .menu-icons > .tab{
     padding: 10px;
+    margin: 0.8rem 0 0.2rem 0;
+    padding-top: 1.3rem;
+    padding-bottom: 1.3rem;
     cursor: pointer;
   }
 
-  .menu-icons .active {
+  .menu-icons .tab.active{
+    /* background-color: #3333 ; */
     border-left: 3px solid #333;
     padding-left: 7px;
   }
+
+  /* #current div:active {
+    border-left: 3px solid #333;
+    padding-left: 7px;
+  } */
+
+  .menu-icons .tab:hover {
+  background-color: #3333 ;
+  }
+
+  /* .menu-icons button:hover {
+  color: rgb(192, 8, 8);
+  } */
 
   .menu-icons img {
     height: 30px;
