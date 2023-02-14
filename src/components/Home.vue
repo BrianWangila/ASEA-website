@@ -56,15 +56,19 @@
                   <h5 @click="onClick" style="margin-left: 1rem;"><button>Activity log</button></h5>
                 </div>
 
-                <div class="news-image" v-for="(newsItem, index) in news" :key="newsItem.title">
+                <!-- <div class="news-image" v-for="(newsItem, index) in news" :key="newsItem.title"> -->
+                <div class="news-image">
                   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner" >
-                      <div class="carousel-item" :class="{ active: index === 0 }" >
-                        <img :src="newsItem.image_url" class="d-block w-100" alt="...">
+                      <!-- <div class="carousel-item" :class="{ active: index === 0 }"> -->
+                      <div class="carousel-item active">
+                        <img src="@/assets/ceo_3.jpg" alt="..."/>
+                        <!-- <img :src="newsItem.image_url" class="d-block w-100" alt="..."> -->
                         <p>
-                          <span>{{ newsItem.title }} ... </span>
-                          <!-- {{ shortenedContent(newsItem.content) }} -->
-                          <a :href="newsItem.link" style="text-decoration: none;">Read more</a>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid totam obcaecati esse asperiores ea accusantium eos in? Labore, dignissimos quaerat. Quos autem cum error ullam, odit veritatis obcaecati nam vitae!
+                          <!-- <span>{{ newsItem.title }} ... </span>
+                          {{ shortenedContent(newsItem.content) }}
+                          <a :href="newsItem.link" style="text-decoration: none;">Read more</a> -->
                         </p>
                       </div>
                     </div>
