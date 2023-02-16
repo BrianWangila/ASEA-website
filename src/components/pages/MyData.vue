@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <main>
       <div class="main">
         <div>
@@ -8,9 +8,6 @@
         <div class="dashboard">
           <div class="title">
             <h3>Manage Data</h3>
-            <div>
-              <p>My Data <!--/ <span style="font-weight: 500">Manage Data</span>--></p>
-            </div>
           </div>
         </div>
       </div>
@@ -66,4 +63,34 @@
   }
 
 
-</style>
+</style> -->
+
+<template>
+  <div>
+    <label for="dateOfBirth">Date of Birth:</label>
+    <input type="date" id="dateOfBirth" v-model="dateOfBirth" :max="maxDate" />
+    <!-- <p v-if="!isValid">You must be at least 18 years old to use this site.</p> -->
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      dateOfBirth: "",
+    };
+  },
+  computed: {
+    maxDate() {
+      const now = new Date();
+      const maxDate = new Date(now.getFullYear() - 18, now.getMonth(), now.getDate());
+      return maxDate.toISOString().slice(0, 10);
+    },
+    isValid() {
+      const dob = new Date(this.dateOfBirth);
+      const maxDob = new Date(this.maxDate);
+      return dob <= maxDob;
+    },
+  },
+};
+</script>
