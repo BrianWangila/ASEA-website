@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <main>
       <div class="main">
         <div>
@@ -63,14 +63,14 @@
   }
 
 
-</style> -->
+</style>
 
-<template>
+<!-- <template>
   <div>
     <label for="dateOfBirth">Date of Birth:</label>
-    <input type="date" id="dateOfBirth" v-model="dateOfBirth" :max="maxDate" />
+    <input type="date" id="dateOfBirth" v-model="dateOfBirth" :max="maxDate" /> -->
     <!-- <p v-if="!isValid">You must be at least 18 years old to use this site.</p> -->
-  </div>
+  <!-- </div>
 </template>
 
 <script>
@@ -93,4 +93,4 @@ export default {
     },
   },
 };
-</script>
+</script> -->

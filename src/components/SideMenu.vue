@@ -11,7 +11,8 @@
         <router-link to="/my-profile"><button>My Profile</button></router-link>
       </div>
       <div>
-        <p>Welcome, <span>{{ user.name }}.</span></p>
+        <!-- <p>Welcome, <span>{{ user.name }}.</span></p> -->
+        <p>Welcome, Brian</p>
       </div>
     </div>
 
@@ -55,14 +56,14 @@
 
 
 <script>
-  import axios from 'axios';
+  // import axios from 'axios';
 
   export default {
     name: 'SideMenu',
     data() {
       return {
-        user: JSON.parse(localStorage.getItem('user')),
-        token: localStorage.getItem('token'),
+        // user: JSON.parse(localStorage.getItem('user')),
+        // token: localStorage.getItem('token'),
         activeTab: "Dashboard"
 
       };
@@ -74,25 +75,27 @@
 
     methods: {
       async logout() {
-        try {
-          const config = {
-            headers: {
-              Authorization: `Bearer ${this.token}`,
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-          };
+        // try {
+        //   const config = {
+        //     headers: {
+        //       Authorization: `Bearer ${this.token}`,
+        //       Accept: "application/json",
+        //       "Content-Type": "application/json",
+        //     },
+        //   };
 
-          await axios.post("http://127.0.0.1:8000/api/logout", {}, config);
+        //   await axios.post("http://127.0.0.1:8000/api/logout", {}, config);
 
-            localStorage.removeItem('token')
-            localStorage.removeItem('user')
+        //     localStorage.removeItem('token')
+        //     localStorage.removeItem('user')
             
-            this.router.push("/login");
+        //     this.router.push("/login");
 
-        } catch (error) {
-          console.error(error);
-        }
+        // } catch (error) {
+        //   console.error(error);
+        // }
+
+        this.router.push("/login");
       },
       setActive(item){
         this.items.forEach(i => {

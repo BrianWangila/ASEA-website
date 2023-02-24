@@ -27,11 +27,11 @@
               <div class="form-left">
                 <div style="margin-bottom: 0.6rem">
                   <label>Name:</label>
-                  <input type="text" :value="user.name" name="name" :disabled="edit"/>
+                  <!-- <input type="text" :value="user.name" name="name" :disabled="edit"/> -->
                 </div>
                 <div style="margin-bottom: 0.6rem">
                   <label>Email:</label>
-                  <input type="text" :value="user.email"  name="email" :disabled="edit"/>
+                  <!-- <input type="text" :value="user.email"  name="email" :disabled="edit"/> -->
                 </div>
                 <div>
                   <label>Phone:</label>
@@ -122,7 +122,7 @@
     },
     data() {
       return {
-        user: JSON.parse(localStorage.getItem('user')),
+        // user: JSON.parse(localStorage.getItem('user')),
         edit: true
       }
 

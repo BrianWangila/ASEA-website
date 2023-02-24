@@ -134,7 +134,7 @@
 <script>
   import Footer from './Footer.vue'
   import SideMenu from './SideMenu.vue'
-  import axios from 'axios';
+  // import axios from 'axios';
 
   export default {
     name: "HomePage",
@@ -149,26 +149,26 @@
       }
     },
 
-    computed: {
-    shortenedContent(content) {
-      const words = content.split(' ');
-      return words.slice(0, 20).join(' ') + ' ...';
-      },
-    },
+    // computed: {
+    // shortenedContent(content) {
+    //   const words = content.split(' ');
+    //   return words.slice(0, 20).join(' ') + ' ...';
+    //   },
+    // },
 
-    async mounted(){
-      try {
-          await axios.get("https://newsdata.io/api/1/news?apikey=pub_170512b24575c227ee4affd297fb05f6d9325&q=exchange")
-          .then(res => {
-            this.news = res.data.results
-          })
-          .catch(error => {
-            console.log(error)
-          })
-        } catch (err) {
-          console.log(err)
-        }
-    },
+    // async mounted(){
+    //   try {
+    //       await axios.get("https://newsdata.io/api/1/news?apikey=pub_170512b24575c227ee4affd297fb05f6d9325&q=exchange")
+    //       .then(res => {
+    //         this.news = res.data.results
+    //       })
+    //       .catch(error => {
+    //         console.log(error)
+    //       })
+    //     } catch (err) {
+    //       console.log(err)
+    //     }
+    // },
   }
 </script>
 

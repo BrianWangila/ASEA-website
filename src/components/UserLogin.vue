@@ -87,7 +87,7 @@
 
 
 <script>
-  import axios from 'axios';
+  // import axios from 'axios';
   import { useVuelidate } from '@vuelidate/core'
   import { required, email, between } from '@vuelidate/validators'
   import { ref } from 'vue';
@@ -133,26 +133,26 @@
 
         if(this.loginValidation.pending || this.loginValidation.error) return;
 
-        try {
-          await axios.post('http://127.0.0.1:8000/api/login', this.loginData, {headers: {}})
-            .then(resp => {
+        // try {
+        //   await axios.post('http://127.0.0.1:8000/api/login', this.loginData, {headers: {}})
+        //     .then(resp => {
 
-              localStorage.setItem('token', resp.data.token);
-              localStorage.setItem('user', JSON.stringify(resp.data.user));
+        //       localStorage.setItem('token', resp.data.token);
+        //       localStorage.setItem('user', JSON.stringify(resp.data.user));
               
-              this.router.push('/');
-            })
-            .catch(error => {
+        //       this.router.push('/');
+        //     })
+        //     .catch(error => {
 
-              const errorMsg = error.message;
-              this.message = errorMsg;
-            })
-            .finally(() => {
+        //       const errorMsg = error.message;
+        //       this.message = errorMsg;
+        //     })
+        //     .finally(() => {
 
-            });
-        } catch (error) {
-          console.log(error)
-        }
+        //     });
+        // } catch (error) {
+        //   console.log(error)
+        // }
         
 
 
@@ -161,6 +161,7 @@
         this.password = ""
         this.checkbox = false
 
+        this.router.push('/');
       }
     }
   }
